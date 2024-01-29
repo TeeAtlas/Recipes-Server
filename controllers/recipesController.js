@@ -32,3 +32,21 @@ const recipes = [
         keywords: ["Italian", "Pasta", "Pesto", "Quick Meal", "Vegetarian"]
     }
 ];
+
+export const getRecipes = async (req, res) => {
+    res.json(recipes);
+    console.log(recipes[1]);
+}
+
+export const getRecipe = async (req, res) => {
+    const {id} = req.params;    
+    const recipe = recipes.find((recipe) => recipe.id === Number(id));
+
+    if (!recipe) {
+        res.sendStatus(404).jason({message: `Recipe with id ${id} not found`});
+    } else {
+        res.json(recipe);
+    }
+    console.log(recipe);
+
+};
