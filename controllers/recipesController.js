@@ -43,7 +43,7 @@ export const getRecipe = async (req, res) => {
     const recipe = recipes.find((recipe) => recipe.id === Number(id));
 
     if (!recipe) {
-        res.sendStatus(404).jason({message: `Recipe with id ${id} not found`});
+        res.sendStatus(404).json({message: `Recipe with id ${id} not found`});
     } else {
         res.json(recipe);
     }
