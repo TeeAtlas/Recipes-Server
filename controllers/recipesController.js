@@ -10,18 +10,18 @@ export const getRecipes = async (req, res) => {
     }
 };
 
-// export const getRecipe = async (req, res) => {
-//     const {id} = req.params;    
-//     try {
-//         const {rows} = await pool.query(`SELECT * FROM recipes WHERE id=$1`, [id]);
-//         if (rows.length === 0) {
-//             res.status(404).json({message: `Recipe with id ${id} not found`});
-//         } else {
-//             //this sets default status to 200 (success)
-//             res.json(rows[0]);
-//         }
-//     } catch(err){
-//         console.error(err);
-//         res.sendStatus(500);
-//     }   
-// };
+export const getRecipe = async (req, res) => {
+    const {id} = req.params;    
+    try {
+        const {rows} = await pool.query(`SELECT * FROM recipes WHERE id=$1`, [id]);
+        if (rows.length === 0) {
+            res.status(404).json({message: `Recipe with id ${id} not found`});
+        } else {
+            //this sets default status to 200 (success)
+            res.json(rows[0]);
+        }
+    } catch(err){
+        console.error(err);
+        res.sendStatus(500);
+    }   
+};
