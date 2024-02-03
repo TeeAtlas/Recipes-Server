@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import recipesRouter from './routes/recipesRouter.js';
+import dotenv from 'dotenv';
 
 dotenv.config();
 //create an instance of express and where funciton is invoked
