@@ -1,7 +1,7 @@
-import ingredientsArray from "../models/ingredientsData.js";
-import { pool } from '../db/pool.js'
+import ingredientsArray from "../models/ingredientsArray.js";
+import { pool } from '../db/pool.js';
 
-async function insertIngredients(ingredients) {
+export default async function insertIngredients(ingredients) {
     for (let ingredientName of ingredients) {
         try {
             // Insert the ingredient into the ingredients table
@@ -26,3 +26,4 @@ async function insertIngredients(ingredients) {
 
 // Call the function with the provided ingredientsArray
 insertIngredients(ingredientsArray);
+

@@ -1,4 +1,6 @@
-import { pool } from "../db/pool.js"
+import insertIngredients from "../scripts/insertIngredients.js"
+import { pool } from "../db/pool.js";
+import ingredientsArray from "../models/ingredientsArray.js";
 
 async function getIngredients () {
     try {
@@ -7,7 +9,7 @@ async function getIngredients () {
         
         console.log("Ingredients Table: ");
         ingredients.forEach( ingredient => {
-            console.log(`ID> ${ingredient.id}, Name: ${ingredient.name}`);
+            console.log(`ID: ${ingredient.id}, Name: ${ingredient.name}`);
         });
     } catch (error) {
         console.error(`Error retrieving ingredients: ${error.message}`);
@@ -15,4 +17,6 @@ async function getIngredients () {
     }
 }
 
-getIngredients();
+await insertIngredients(ingredientsArray);
+
+await getIngredients();
