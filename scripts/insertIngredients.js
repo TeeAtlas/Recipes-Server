@@ -1,25 +1,20 @@
-import ingredientsArray from "../models/ingredientsArray.js";
+import ingredientsArray from "../array/ingredientsArray.js";
 import { pool } from '../db/pool.js';
+import { config } from "dotenv";
+config({ path: "../.env" });
 
-export default async function insertIngredients(ingredients) {
-    for (let ingredientName of ingredients) {
+export const  insertIngredients = async (ingredients) => {
+    for (let ingredient of ingredients) {
         try {
             // Insert the ingredient into the ingredients table
             const result = await pool.query(
                 'INSERT INTO ingredients (name) VALUES ($1) ON CONFLICT (name) DO NOTHING RETURNING id',
-                [ingredientName]
+                [ingredient]
             );
-
-            if (result.rows.length > 0) {
-                // The ingredient was inserted or already exists, you can handle as needed
-                console.log(`Ingredient "${ingredientName}" inserted successfully or already exists.`);
-            } else {
-                // Handle the case where the ingredient could not be inserted
-                console.error(`Failed to insert ingredient "${ingredientName}".`);
-            }
+                console.error(`Processed ingredient "${ingredient}".`);
         } catch (error) {
             // Handle any errors that occur during the database operation
-            console.error(`Error inserting ingredient "${ingredientName}": ${error.message}`);
+            console.error(`Error inserting ingredient "${ingredient}": ${error.message}`);
             console.error(error);
         }
     }
@@ -27,4 +22,3 @@ export default async function insertIngredients(ingredients) {
 
 // Call the function with the provided ingredientsArray
 insertIngredients(ingredientsArray);
-
