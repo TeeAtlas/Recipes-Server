@@ -20,6 +20,7 @@ export default async function insertIngredients(ingredients) {
         } catch (error) {
             // Handle any errors that occur during the database operation
             console.error(`Error inserting ingredient "${ingredientName}": ${error.message}`);
+            console.error(error);
         }
     }
 }
