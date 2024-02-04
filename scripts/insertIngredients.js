@@ -1,4 +1,4 @@
-import ingredientsArray from "../array/ingredientsArray.js";
+import ingredientsArray from "./ingredientsArray.js";
 import { pool } from '../db/pool.js';
 import { config } from "dotenv";
 config({ path: "../.env" });
