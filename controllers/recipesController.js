@@ -1,4 +1,6 @@
+import ingredientsArray from '../scripts/ingredientsArray.js';
 import { pool } from '../db/pool.js';
+import { joinRecipe } from '../scripts/joinRecipe.js';
 
 export const getRecipes = async (req, res) => {
     try {
@@ -11,7 +13,7 @@ export const getRecipes = async (req, res) => {
 };
 
 export const getRecipe = async (req, res) => {
-    const {id} = req.params;    
+    const { id } = req.params;    
     try {
         const {rows} = await pool.query(`SELECT * FROM recipes WHERE id=$1`, [id]);
         if (rows.length === 0) {
@@ -24,4 +26,16 @@ export const getRecipe = async (req, res) => {
         console.error(err);
         res.sendStatus(500);
     }   
+};
+
+export const linkIgredients = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await joinRecipe(id, ingredientsArray);
+        res.status(200).json({ message: "ingredients linked to recipe successfully" })
+    } catch (error) {
+        console.error('Error linking ingredients', error.message)
+        res.status(500).json({ error: 'Internal server error'})
+    }
 };
